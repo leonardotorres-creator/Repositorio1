@@ -1,20 +1,46 @@
 #include <stdio.h>
 #include <string.h>
+#include <ctype.h> //isdigit() para validar que el ID sea numérico
+#include <stdlib.h> //atoi() para convertir string a entero
 
 int main() {
-    int id, stock, ventasRealizadas = 0;
-    char nombre[50];
+    int stock, ventasRealizadas = 0;
+    char nombre[50], id[10];
     float precio, gananciasTotal = 0.0;
     int opcion, cantidad;
     float descuento, precioFinal, ganancia;
     
     // 1. REGISTRO DEL PRODUCTO
-    printf("=== REGISTRO DEL PRODUCTO ===\n");
-    printf("Ingrese ID del producto: ");
-    scanf("%d", &id);
+    printf("\n=== REGISTRO DE PRODUCTO ===");
+    do
+    {
+        printf("\nIngrese ID del producto: ");
+        scanf("%s", &id);
+        // Validar que el ID sea un número positivo y no contenga caracteres no numéricos
+        for (int i = 0; i < 10; i++)
+            {
+                // Verificar si el carácter no es un dígito
+                if(!isdigit(id[i])) {
+                    // Si el primer carácter no es un dígito, mostrar mensaje de error
+                    if(atoi(id) <= 0) {
+                        printf("ID no valido. Debe ser un número positivo.\n");
+                        break;
+                    }else if (!isdigit(id[0])){
+                        printf("ID no valido. Debe contener solo números.\n");
+                        break;
+                    }
+                }    
+            }
+    } while (atoi(id) <= 0 || !isdigit(id[0]));
+    
+    printf("✓ ID válido.\n");
+    
+    while(getchar() != '\n'); // Limpiar el buffer de entrada
     
     printf("Ingrese nombre del producto: ");
     scanf("%s", nombre);
+
+    while(getchar() != '\n');
     
     printf("Ingrese stock inicial: ");
     scanf("%d", &stock);
@@ -23,6 +49,7 @@ int main() {
     scanf("%f", &precio);
     
     printf("\n¡Producto registrado exitosamente!\n\n");
+    while(getchar() != '\n');
     
     // 2. MENÚ INTERACTIVO
     do {
@@ -92,7 +119,7 @@ int main() {
                 printf("\n--- INFORMACIÓN DEL PRODUCTO ---\n");
                 printf("ID\t\tNombre\t\tStock\t\tPrecio\n");
                 printf("-\t\t------\t\t-----\t\t------\n");
-                printf("%d\t\t%s\t\t%d\t\t%.2f\n\n", id, nombre, stock, precio);
+                printf("%s\t\t%s\t\t%d\t\t%.2f\n\n", id, nombre, stock, precio);
                 break;
                 
             case 4: // GANANCIAS
