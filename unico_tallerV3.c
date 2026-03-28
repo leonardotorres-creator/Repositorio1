@@ -4,10 +4,10 @@
 #include <stdlib.h> //atoi() para convertir string a entero
 
 int main() {
-    int stock, ventasRealizadas = 0;
-    char nombre[50], id[10];
-    float precio, gananciasTotal = 0.0;
-    int opcion, cantidad;
+    int ventasRealizadas = 0, esValido=1;
+    char nombre[50], id[10], stock[10], precio[10];
+    float preciofloat, gananciasTotal = 0.0;
+    int opcion, cantidad, stockInt;
     float descuento, precioFinal, ganancia;
     
     // 1. REGISTRO DEL PRODUCTO
@@ -16,7 +16,7 @@ int main() {
     {
         printf("\nIngrese ID del producto: ");
         scanf("%s", &id);
-        // Validar que el ID sea un número positivo y no contenga caracteres no numéricos
+        // Validar que el ID sea un número positivo y no contenga letras
         for (int i = 0; i < 10; i++)
             {
                 // Verificar si el carácter no es un dígito
@@ -35,18 +35,68 @@ int main() {
     
     printf("✓ ID válido.\n");
     
-    while(getchar() != '\n'); // Limpiar el buffer de entrada
+    while(getchar() != '\n'); // Limpiar reciduos del ID
     
     printf("Ingrese nombre del producto: ");
     scanf("%s", nombre);
 
-    while(getchar() != '\n');
+    while(getchar() != '\n');//Limpia todo despues de un espacio en el nombre del producto
+
+    // Validar que el stock no sea negativo
+    do
+    {
+        printf("Ingrese stock inicial: ");
+        scanf("%s", &stock);
+        for(int i = 0; stock[i] != '\0'; i++)
+            {
+                //Vlidar que el stock sea un número positivo y no contenga letras
+                if(!isdigit(stock[i])) {
+                    // Si el primer carácter no es un dígito, mostrar mensaje de error
+                    if(atoi(stock) <= 0) {
+                        printf("Stock no valido. Debe ser un número positivo.\n");
+                        break;
+                    }else if (!isdigit(stock[0])){
+                        printf("Stock no valido. Debe contener solo números.\n");
+                        break;
+                    }
+                }    
+            }
+    } while (atoi(stock) <= 0 || !isdigit(stock[0]));
+
+    stockInt = atoi(stock); // Convertir stock a entero para operaciones posteriores
     
-    printf("Ingrese stock inicial: ");
-    scanf("%d", &stock);
-    
-    printf("Ingrese precio unitario: ");
-    scanf("%f", &precio);
+    //Validar que el precio pueda ser decimal, positivo y no contenga letras
+    do{
+        printf("Ingrese precio unitario: ");
+        scanf("%s", precio);
+
+        int puntos = 0;
+        for (int i = 0; precio[i] != '\0'; i++) {
+            // Permitir dígitos
+            if (isdigit(precio[i])) {
+                continue;
+            }
+            // Permitir 1 solo punto decimal (pero que no sea el primer caracter)
+            else if (precio[i] == '.' && puntos == 0 && i > 0) {
+                puntos++;
+            }
+            else {
+                esValido = 0;
+                break;
+            }
+        }
+        if (!esValido) {
+            printf("Precio no valido. Debe ser un numero positivo.\n");
+        } else {
+            // Convertir el precio a float
+            preciofloat = atof(precio);
+                // Validar que el precio sea mayor a cero
+            if (preciofloat <= 0) {
+                printf("El precio debe ser mayor a cero.\n");
+                esValido = 0;
+            }
+        }
+    } while (!esValido);
     
     printf("\n¡Producto registrado exitosamente!\n\n");
     while(getchar() != '\n');
@@ -75,8 +125,8 @@ int main() {
                 }
                 
                 // Validación de stock suficiente
-                if(cantidad > stock) {
-                    printf("ERROR: Stock insuficiente. Disponible: %d unidades.\n\n", stock);
+                if(cantidad > stockInt) {
+                    printf("ERROR: Stock insuficiente. Disponible: %d unidades.\n\n", stockInt);
                 } else {
                     printf("Descuento opcional (%%): ");
                     scanf("%f", &descuento);
@@ -88,11 +138,11 @@ int main() {
                     }
                     
                     // Calcular ganancia con descuento
-                    precioFinal = precio * (1 - descuento / 100);
+                    precioFinal = preciofloat * (1 - descuento / 100);
                     ganancia = precioFinal * cantidad;
                     
                     // Actualizar stock y ganancias
-                    stock -= cantidad;
+                    stockInt -= cantidad;
                     gananciasTotal += ganancia;
                     ventasRealizadas++;
                     
@@ -110,8 +160,8 @@ int main() {
                 if(cantidad < 0) {
                     printf("ERROR: No puede ingresar cantidad negativa.\n\n");
                 } else {
-                    stock += cantidad;
-                    printf("✓ Stock actualizado a: %d unidades\n\n", stock);
+                    stockInt += cantidad;
+                    printf("✓ Stock actualizado a: %d unidades\n\n", stockInt);
                 }
                 break;
                 
@@ -119,7 +169,7 @@ int main() {
                 printf("\n--- INFORMACIÓN DEL PRODUCTO ---\n");
                 printf("ID\t\tNombre\t\tStock\t\tPrecio\n");
                 printf("-\t\t------\t\t-----\t\t------\n");
-                printf("%s\t\t%s\t\t%d\t\t%.2f\n\n", id, nombre, stock, precio);
+                printf("%s\t\t%s\t\t%d\t\t%.2f\n\n", id, nombre, stockInt, preciofloat);
                 break;
                 
             case 4: // GANANCIAS
