@@ -19,10 +19,8 @@ int main() {
         // Validar que el ID sea un número positivo y no contenga letras
         for (int i = 0; i < 10; i++)
             {
-                // Verificar si el carácter no es un dígito
-                if(!isdigit(id[i])) {
-                    // Si el primer carácter no es un dígito, mostrar mensaje de error
-                    if(atoi(id) <= 0) {
+                if(!isdigit(id[i])) {// Verificar si el carácter no es un dígito
+                    if(atoi(id) <= 0) {// Si el primer carácter no es un dígito, mostrar mensaje de error
                         printf("ID no valido. Debe ser un número positivo.\n");
                         break;
                     }else if (!isdigit(id[0])){
@@ -85,7 +83,7 @@ int main() {
                 break;
             }
         }
-        if (!esValido) {
+        if (!esValido) {//se encontro un caracter no valido
             printf("Precio no valido. Debe ser un numero positivo.\n");
         } else {
             // Convertir el precio a float
