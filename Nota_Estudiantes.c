@@ -8,8 +8,8 @@ aprobaron cada asignatura.
 
 #include <stdio.h>
 
-float estudiante_materia[5][3], promedio[5];
-int opc=0, opc2=0, reprobados=0, aprobados;
+float estudiante_materia[5][3], promedio[5], promedio_asignatura[3];
+int opc=0, opc2=0, reprobados=0, aprobados=0;
 void matriznotas();
 
 
@@ -54,29 +54,75 @@ int main(){
             break;
 
         default:
-            printf("Ingrese una opcion valida");
+            printf("Ingrese una opcion valida\n");
             break;
         }
         
-    } while (opc==6);
+    } while (opc!=6);
 
-    aprobados = 5 - reprobados;
+    if (opc==6)
+    {
+        //Calcula el promedio por estudiante
+        printf("Promedio de calificaciones por estudiante:\n");
+        for (int i = 0; i < 5; i++)
+        {
+            printf("Estudiante %d: %.2f\n", i+1, promedio[i]);
+        }
+        printf("\nCantidad de estudiantes aprobados: %d\n", aprobados);
+        printf("Cantidad de estudiantes reprobados: %d\n", reprobados);
+        
+        //Calcula el promedio por asignatura
+        printf("Promedio de calificaciones por asignatura:\n");
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 5; j++)
+            {
+                promedio_asignatura[i] += estudiante_materia[j][i];
+            }
+            promedio_asignatura[i] /= 5;
+            printf("Asignatura %d: %.2f\n", i+1, promedio_asignatura[i]);
+        }
+    }
     
+
 }
 
 //Funcion para recoger notas
 void matriznotas(){
     for (int i = 0; i < 3; i++)
     {
+        //Recoge notas en una matriz
         do
         {
             scanf("%f", &estudiante_materia[opc2][i]);
-        } while (estudiante_materia[opc2][i]>=10 && estudiante_materia[opc2][i]<=0);
-        if (estudiante_materia[opc2][i]<6)
+            //verifica si es un numero
+            if (scanf("%f", &estudiante_materia[opc2][i]) != 1)
+            {
+                printf("Error: Ingrese un numero\n-------------------------------\n");
+                //limpia el buffer
+                while(getchar() != '\n');
+            }
+            //verifica si la nota es valida
+            if (estudiante_materia[opc2][i]>10 || estudiante_materia[opc2][i]<0)
+            {
+                printf("Ingrese una nota valida\n -------------------------------\n");
+                while(getchar() != '\n');
+            }
+            
+        } while (estudiante_materia[opc2][i]>10 || estudiante_materia[opc2][i]<0); 
+        
+        //Calcula el promedio de cada estudiante
+        promedio[opc2] += estudiante_materia[opc2][i];
+        promedio[opc2] /= 3;
+
+        //Cuenta los reprobados y aprobados
+        if (promedio[opc2]<6)
         {
             reprobados++;
+        }else
+        {
+            aprobados++;
         }
-        promedio[opc2] += estudiante_materia[opc2][i];
     }
-    printf("Notas registradas");
+    printf("Notas registradas:\n%.2f\n%.2f\n%.2f\n-------------------\n", estudiante_materia[opc2][0], estudiante_materia[opc2][1], estudiante_materia[opc2][2]);
 }
