@@ -4,7 +4,7 @@ Descripcion: Una escuela desea implementar un programa en C que le permita gesti
 en varias asignaturas. Además de gestionar las calificaciones, el programa debe calcular y mostrar información relevante 
 como el promedio de calificaciones por estudiante y por asignatura, la calificación más alta y baja, y cuántos estudiantes
 aprobaron cada asignatura.
-HORAS INVERTIDAS: 6 horas
+HORAS INVERTIDAS: 7 horas
 */
 
 #include <stdio.h>
