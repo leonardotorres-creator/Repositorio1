@@ -13,9 +13,8 @@ float estudiante_materia[5][3], promedio[5], promedio_asignatura[3];
 int opc=0, opc2=(-1), reprobados=0, aprobados=0;
 char *nombres_estudiantes[5] = {"Pablo", "Maria", "Jose", "Luis", "Victoria"};//punteros para los nombres de los estudiantes
 char *nombres_asignaturas[3] = {"Matematicas", "Ciencias", "Literatura"};//punteros para los nombres de las asignaturas
-int estado_estudiantes[5] = {0, 0, 0, 0, 0}; // Todos empiezan en 0 (pendiente)
-void matriznotas();
-void resultados();
+int estado_estudiantes[5] = {0, 0, 0, 0, 0}; // Todos empiezan en (pendiente)
+void matriznotas();//Para calcular las notas y promedios
 
 
 int main(){
