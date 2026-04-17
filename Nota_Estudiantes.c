@@ -1,10 +1,10 @@
 /*
-Autor: Leonardo Torres
+Autor: Leonardo Torres con ayuda de github copilot
 Descripcion: Una escuela desea implementar un programa en C que le permita gestionar las calificaciones de un grupo de estudiantes
 en varias asignaturas. Además de gestionar las calificaciones, el programa debe calcular y mostrar información relevante 
 como el promedio de calificaciones por estudiante y por asignatura, la calificación más alta y baja, y cuántos estudiantes
 aprobaron cada asignatura.
-HORAS INVERTIDAS: 7 horas
+HORAS INVERTIDAS: 8 horas
 */
 
 #include <stdio.h>
