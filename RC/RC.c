@@ -7,6 +7,8 @@ Descripcion: Optimizacion de produccion en una fabrica de compnentes electronico
 #include <stdio.h>
 #include <string.h>
 void informacion(char nombres[][30], int tam, float *p, float *c);
+void buscar();
+int menu_pri();
 
 int main()
 {
@@ -16,14 +18,33 @@ int main()
     char recursos[10][30] = {"Ceramica", "Oro", "Carcasas-de-aluminio", "Alambre-de-Cobre", "Obleas-de-Silicio", "Carbon-pulverizado", "Agua-Ultra-Pura", "EUV", "Wafers", "DINERO-TOTAL=>"};
     float recursos_cantidad[10] = {10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 10000, 1000000};//Cantidades para cada recurso escrito en oreden
     float recurso_precio[10] = {10, 13.4, 5.6, 23.4, 5, 0.05, 1.6, 20.6, 0.3, 0};
+    int opc = menu_pri();
 
-    printf("\n=================Datos de los productos=================\n");
-    printf("====Producto======Costo unitario======Tiempo de produccion====\n");
-    informacion(productos, 5, dinero_producto, tiempo);
+    switch (opc)
+    {
+    case 1:
+        
+        break;
+    case 2:
+        printf("\n=================Datos de los productos=================\n");
+        printf("====Producto======Costo unitario======Tiempo de produccion====\n");
+        informacion(productos, 5, dinero_producto, tiempo);
+        break;
+    case 3:
 
-    printf("=================RECURSOS=================\n");
-    printf("====Recurso=============Cantidad==============Precio====\n");
-    informacion(recursos, 10, recursos_cantidad, recurso_precio);
+        break;
+    case 4:
+        printf("========================RECURSOS========================\n");
+        printf("====Recurso=============Cantidad==============Precio====\n");
+        informacion(recursos, 10, recursos_cantidad, recurso_precio);
+        break;
+    case 5:
+
+        break;
+    default:
+        break;
+    }
+
 }
 
 void informacion(char nombres[][30], int tam, float *p, float *c)
@@ -49,4 +70,39 @@ void informacion(char nombres[][30], int tam, float *p, float *c)
         printf("%.2f\t\t", *(p+i));
         printf("%.2f\n", *(c+i));
     }
+}
+
+int menu_pri()
+{
+    int sel = 0;
+    printf("1) Editar informacion de productos\n");
+    printf("2) Informacion de productos\n");
+    printf("3) Eliminar producto\n");
+    printf("-------------------------------------\n");
+    printf("4) Informacion de recursos\n");
+    printf("5) Producir productos\n");
+    scanf("%d", &sel);
+    return sel;
+}
+
+void buscar(char bus[][30], int tam)
+{
+    printf("Busque el producto que desea editar");
+    for (int i = 0; i < tam; i++)
+    {
+        char tecla = _getch();
+        for (int j = 0; bus[i][j] != tecla; j++)
+        {
+            
+        }
+        
+    }
+    
+}
+
+int menu_sec()
+{
+    printf("1) Editar nombre\n");
+    printf("2) Editar precio\n");
+    printf("3) Editar cantidad\n");
 }
