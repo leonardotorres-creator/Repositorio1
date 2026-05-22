@@ -6,6 +6,9 @@ Descripcion: Supo (Superheroes Organizacion)
 #include <string.h>
 #include "colors.h"
 
+void registro (int tam);
+void buscar ();
+
 typedef struct{
     char Origen[50];
     char poderes[100];
@@ -26,20 +29,29 @@ typedef struct{
 int main()
 {   
     int opc=0;
+    int n=0;
+    printf(YELLOW"Cuantos superheroes ingresara (MAX 10)"RESET);
+    do
+    {
+        scanf("%d", &n);
+        if (n < 1 || n > 10)
+        {
+            printf(RED"El rango de superheroes es 1-10"RESET);
+        }
+        
+    } while (n < 1 || n > 10);
+    registro (n);
     
 }
 
-void registro()
+void registro(int tam)
 {
-    int n=0;
-    printf("Cuantos superheroes ingresara (MAX 10)");
-    scanf("%d", &n);
-    super heroe[n];
-    for (int i = 0; i < n; i++)
+    super heroe[tam];
+    for (int i = 0; i < tam; i++)
     {
         printf(GREEN"============================================");
         printf("\nRegistre al Superheroe:\n");
-        printf("============================================"RESET);
+        printf("============================================");
         printf("\nID: ");
         scanf("%d", &heroe[i].ID);
         getchar();
@@ -57,8 +69,8 @@ void registro()
 
         printf("\nSaga: ");
         fgets(heroe[i].saga, 10, stdin);
-        printf(GREEN"\n+++++++++++++++++++++++++++++++++++++++++++");
-        printf("\nAhora llenemos la Ficha tecnica:\n"RESET);
+        printf(RESET BLUE"\n+++++++++++++++++++++++++++++++++++++++++++");
+        printf("\nAhora llenemos la Ficha tecnica:\n");
 
         printf("Origen: ");
         fgets(heroe[i].ficha.Origen, 50, stdin);
@@ -78,9 +90,18 @@ void registro()
             scanf("%d", &heroe[i].estado);
             if (heroe[i].estado != 1 && heroe[i].estado != 0)
             {
-                printf(RED"\nOpcion no existente\n"RESET);
+                printf(RESET RED"\nOpcion no existente\n"RESET);
             }
             
         } while (heroe[i].estado != 1 && heroe[i].estado != 0);
     }
+}
+
+int vld()
+{
+    int leido = 1;
+}
+void buscar()
+{
+
 }
