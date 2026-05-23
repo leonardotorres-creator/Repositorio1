@@ -3,7 +3,7 @@
 
 #include <stdio.h>
 
-int valid_int(char* mensaje, int min, int max);
-float valid_float(char* mensaje, float min, float max);
+int valid_int();
+float valid_float();
 
 #endif // DEBUG

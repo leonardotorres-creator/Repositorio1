@@ -8,6 +8,8 @@ Descripcion: Supo (Superheroes Organizacion)
 
 void registro (int tam);
 void buscar ();
+int valid_int();
+float valid_float();
 
 typedef struct{
     char Origen[50];
@@ -52,19 +54,20 @@ void registro(int tam)
         printf(GREEN"============================================");
         printf("\nRegistre al Superheroe:\n");
         printf("============================================");
+
         printf("\nID: ");
-        scanf("%d", &heroe[i].ID);
+        heroe[i].ID = valid_int();
         getchar();
 
         printf("\nNombre: ");
         fgets(heroe[i].nombre, 80, stdin);
 
         printf("\nPeso: ");
-        scanf("%f", &heroe[i].peso);
+        heroe[i].peso = valid_float();
         getchar();
         
         printf("\nAltura: ");
-        scanf("%f", &heroe[i].altura);
+        heroe[i].altura = valid_float();
         getchar();
 
         printf("\nSaga: ");
@@ -87,7 +90,7 @@ void registro(int tam)
         do
         {
             printf("\nEsta Habilitado? 1)Si 0)No\n");
-            scanf("%d", &heroe[i].estado);
+            heroe[i].estado = valid_int();
             if (heroe[i].estado != 1 && heroe[i].estado != 0)
             {
                 printf(RESET RED"\nOpcion no existente\n"RESET);
@@ -97,9 +100,42 @@ void registro(int tam)
     }
 }
 
-int vld()
+float valid_float ()
 {
-    int leido = 1;
+    float valor;
+    int leido;
+
+    while (1) {
+        leido = scanf("%f", &valor);
+
+        if (leido != 1) {
+            // Caso: El usuario ingresó letras
+            printf(RED"\nERROR: Entrada no valida. Por favor, ingresa un numero.\n"RESET);
+            while (getchar() != '\n');
+        }else{
+            break;
+        }
+    }
+    return valor;
+}
+
+int valid_int ()
+{
+    int valor;
+    int leido;
+
+    while (1) {
+        leido = scanf("%d", &valor);
+
+        if (leido != 1) {
+            // Caso: El usuario ingresó letras
+            printf(RED"\nERROR: Entrada no valida. Por favor, ingresa un numero.\n"RESET);
+            while (getchar() != '\n');
+        }else{
+            break;
+        }
+    }
+    return valor;
 }
 void buscar()
 {
