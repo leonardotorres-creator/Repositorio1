@@ -1,4 +1,5 @@
 #include "vld.h"
+#include "colors.h"
 
 int valid_int ()
 {
@@ -10,7 +11,7 @@ int valid_int ()
 
         if (leido != 1) {
             // Caso: El usuario ingresó letras
-            printf("\nERROR: Entrada no valida. Por favor, ingresa un numero.\n");
+            printf(RED"\nERROR: Entrada no valida. Por favor, ingresa un numero.\n"RESET);
             while (getchar() != '\n');
         } else{
             break;
@@ -29,7 +30,7 @@ float valid_float ()
 
         if (leido != 1) {
             // Caso: El usuario ingresó letras
-            printf("\nERROR: Entrada no valida. Por favor, ingresa un numero.\n");
+            printf(RED"\nERROR: Entrada no valida. Por favor, ingresa un numero.\n"RESET);
             while (getchar() != '\n');
         }else{
             break;
